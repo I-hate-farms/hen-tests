@@ -1,0 +1,427 @@
+# Galician translation for webcontracts
+# Copyright (c) 2013 Rosetta Contributors and Canonical Ltd 2013
+# This file is distributed under the same license as the webcontracts package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2013.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: webcontracts\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2012-09-03 11:07+0200\n"
+"PO-Revision-Date: 2013-05-07 22:04+0000\n"
+"Last-Translator: Miguel Anxo Bouzada <mbouzada@gmail.com>\n"
+"Language-Team: Galician <gl@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2013-05-08 05:47+0000\n"
+"X-Generator: Launchpad (build 16598)\n"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/Facebook.vala:40
+#: /home/noelco/webcontracts/po/../src/Contracts/Flickr.vala:41
+#: /home/noelco/webcontracts/po/../src/Contracts/Twitter.vala:41
+#: /home/noelco/webcontracts/po/../src/Contracts/GooglePlus.vala:42
+#: /home/noelco/webcontracts/po/../src/Contracts/Youtube.vala:40
+msgid "Set Account"
+msgstr "Estabeleza unha conta"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/Facebook.vala:44
+#: /home/noelco/webcontracts/po/../src/Contracts/Flickr.vala:46
+#: /home/noelco/webcontracts/po/../src/Contracts/Twitter.vala:46
+#: /home/noelco/webcontracts/po/../src/Contracts/GooglePlus.vala:48
+#: /home/noelco/webcontracts/po/../src/Contracts/Youtube.vala:42
+msgid "Current Account:"
+msgstr "Conta actual"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/Flickr.vala:70
+#: /home/noelco/webcontracts/po/../src/Contracts/Twitter.vala:70
+msgid "Confirm PIN"
+msgstr "Confirmar o PIN"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/GooglePlus.vala:46
+msgid "The Google+ API does not allow sharing yet!"
+msgstr "A API de Google+ aínda non permite compartir!"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/Imagebin.vala:36
+msgid "Nickname"
+msgstr "Alcume"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/GoogleTranslate.vala:21
+#: /home/noelco/webcontracts/po/../src/webcontracts.vala:33
+msgid "Google Translate"
+msgstr "Tradutor de Google"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/GoogleTranslate.vala:34
+msgid "Afrikaans"
+msgstr "Africáner"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/GoogleTranslate.vala:35
+msgid "Albanian"
+msgstr "Albanés"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/GoogleTranslate.vala:36
+msgid "Arabic"
+msgstr "Árabe"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/GoogleTranslate.vala:37
+msgid "Armenian"
+msgstr "Armenio"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/GoogleTranslate.vala:38
+msgid "Azerbaijani"
+msgstr "Azerí"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/GoogleTranslate.vala:39
+msgid "Basque"
+msgstr "Eúscaro"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/GoogleTranslate.vala:40
+msgid "Belarusian"
+msgstr "Bieloruso"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/GoogleTranslate.vala:41
+msgid "Bengali"
+msgstr "Bengalí"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/GoogleTranslate.vala:42
+msgid "Bulgarian"
+msgstr "Búlgaro"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/GoogleTranslate.vala:43
+msgid "Catalan"
+msgstr "Catalán"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/GoogleTranslate.vala:44
+msgid "Chinese (Simplified)"
+msgstr "Chinés (simplificado)"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/GoogleTranslate.vala:45
+msgid "Chinese (Traditional)"
+msgstr "Chinés (tradicional)"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/GoogleTranslate.vala:46
+msgid "Croation"
+msgstr "Croata"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/GoogleTranslate.vala:47
+msgid "Czech"
+msgstr "Checo"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/GoogleTranslate.vala:48
+msgid "Danish"
+msgstr "Danés"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/GoogleTranslate.vala:49
+msgid "Dutch"
+msgstr "Holandés"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/GoogleTranslate.vala:50
+msgid "English"
+msgstr "Inglés"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/GoogleTranslate.vala:51
+msgid "Estonian"
+msgstr "Estonio"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/GoogleTranslate.vala:52
+msgid "Filipino"
+msgstr "Filipino"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/GoogleTranslate.vala:53
+msgid "Finnish"
+msgstr "Finés"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/GoogleTranslate.vala:54
+msgid "French"
+msgstr "Francés"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/GoogleTranslate.vala:55
+msgid "Galician"
+msgstr "Galego"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/GoogleTranslate.vala:56
+msgid "Georgian"
+msgstr "Xeorxiano"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/GoogleTranslate.vala:57
+msgid "German"
+msgstr "Alemán"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/GoogleTranslate.vala:58
+msgid "Greek"
+msgstr "Grego"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/GoogleTranslate.vala:59
+msgid "Gujarati"
+msgstr "Guxarati"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/GoogleTranslate.vala:60
+msgid "Haitian Creole"
+msgstr "Crioulo haitiano"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/GoogleTranslate.vala:61
+msgid "Hebrew"
+msgstr "Hebreo"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/GoogleTranslate.vala:62
+msgid "Hindi"
+msgstr "Hindi"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/GoogleTranslate.vala:63
+msgid "Hungarian"
+msgstr "Húngaro"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/GoogleTranslate.vala:64
+msgid "Icelandic"
+msgstr "Islandés"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/GoogleTranslate.vala:65
+msgid "Indonesian"
+msgstr "Indonesio"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/GoogleTranslate.vala:66
+msgid "Irish"
+msgstr "Irlandés"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/GoogleTranslate.vala:67
+msgid "Italian"
+msgstr "Italiano"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/GoogleTranslate.vala:68
+msgid "Japanese"
+msgstr "Xaponés"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/GoogleTranslate.vala:69
+msgid "Kannada"
+msgstr "Canadá"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/GoogleTranslate.vala:70
+msgid "Korean"
+msgstr "Coreano"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/GoogleTranslate.vala:71
+msgid "Latin"
+msgstr "Latín"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/GoogleTranslate.vala:72
+msgid "Latvian"
+msgstr "Letonio"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/GoogleTranslate.vala:73
+msgid "Lithuanian"
+msgstr "Lituano"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/GoogleTranslate.vala:74
+msgid "Macedonian"
+msgstr "Macedonio"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/GoogleTranslate.vala:75
+msgid "Malay"
+msgstr "Malaio"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/GoogleTranslate.vala:76
+msgid "Maltese"
+msgstr "Maltés"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/GoogleTranslate.vala:77
+msgid "Norwegian"
+msgstr "Noruegués"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/GoogleTranslate.vala:78
+msgid "Persian"
+msgstr "Iraniano"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/GoogleTranslate.vala:79
+msgid "Polish"
+msgstr "Polaco"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/GoogleTranslate.vala:80
+msgid "Portuguese"
+msgstr "Portugués"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/GoogleTranslate.vala:81
+msgid "Romanian"
+msgstr "Romanés"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/GoogleTranslate.vala:82
+msgid "Russian"
+msgstr "Ruso"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/GoogleTranslate.vala:83
+msgid "Serbian"
+msgstr "Serbio"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/GoogleTranslate.vala:84
+msgid "Slovak"
+msgstr "Eslovaco"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/GoogleTranslate.vala:85
+msgid "Slovenian"
+msgstr "Esloveno"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/GoogleTranslate.vala:86
+msgid "Spanish"
+msgstr "Castelán"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/GoogleTranslate.vala:87
+msgid "Swahili"
+msgstr "Suahili"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/GoogleTranslate.vala:88
+msgid "Swedish"
+msgstr "Sueco"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/GoogleTranslate.vala:89
+msgid "Tamil"
+msgstr "Tamil"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/GoogleTranslate.vala:90
+msgid "Telugu"
+msgstr "Telugu"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/GoogleTranslate.vala:91
+msgid "Thai"
+msgstr "Tailandés"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/GoogleTranslate.vala:92
+msgid "Turkish"
+msgstr "Turco"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/GoogleTranslate.vala:93
+msgid "Ukrainian"
+msgstr "Ucraíno"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/GoogleTranslate.vala:94
+msgid "Urdu"
+msgstr "Urdu"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/GoogleTranslate.vala:95
+msgid "Vitnamese"
+msgstr "Vietnamita"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/GoogleTranslate.vala:96
+msgid "Welsh"
+msgstr "Galés"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/GoogleTranslate.vala:97
+msgid "Yiddish"
+msgstr "Iídiche"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/GoogleTranslate.vala:118
+msgid "Default language"
+msgstr "Idioma predefinido"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/Pastebin.vala:39
+msgid "Never"
+msgstr "Nunca"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/Pastebin.vala:40
+msgid "10 minutes"
+msgstr "10 minutos"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/Pastebin.vala:41
+msgid "1 hour"
+msgstr "1 hora"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/Pastebin.vala:42
+msgid "1 day"
+msgstr "1 día"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/Pastebin.vala:43
+msgid "1 month"
+msgstr "1 mes"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/Pastebin.vala:53
+msgid "Public pastes"
+msgstr "Portapapeis públicos"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/Pastebin.vala:55
+msgid "Expire"
+msgstr "Caducar"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/Videobin.vala:32
+msgid "john@smith.com"
+msgstr "daniel@castelao.com"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/Videobin.vala:35
+msgid "Email"
+msgstr "Correo"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/Imgur.vala:19
+#: /home/noelco/webcontracts/po/../src/Contracts/Wikipedia.vala:17
+#: /home/noelco/webcontracts/po/../src/Contracts/GoogleSearch.vala:17
+msgid "No settings"
+msgstr "Sen axustes"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/Wikipedia.vala:7
+#: /home/noelco/webcontracts/po/../src/webcontracts.vala:41
+msgid "Wikipedia"
+msgstr "Wikipedia"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/GoogleSearch.vala:7
+msgid "Google Search"
+msgstr "Busca no Google"
+
+#: /home/noelco/webcontracts/po/../src/webcontracts.vala:27
+msgid "Sharing Accounts"
+msgstr "Contas compartidas"
+
+#: /home/noelco/webcontracts/po/../src/webcontracts.vala:28
+msgid "Share at Facebook"
+msgstr "Compartir no Facebook"
+
+#: /home/noelco/webcontracts/po/../src/webcontracts.vala:29
+msgid "Upload an image to flickr"
+msgstr "Enviar unha imaxe ao Flickr"
+
+#: /home/noelco/webcontracts/po/../src/webcontracts.vala:30
+msgid "Share at Google+"
+msgstr "Compartir no Google+"
+
+#: /home/noelco/webcontracts/po/../src/webcontracts.vala:31
+msgid "Search Google"
+msgstr "Buscar no Google"
+
+#: /home/noelco/webcontracts/po/../src/webcontracts.vala:32
+msgid "Search on the Web with google"
+msgstr "Buscar na web co Google"
+
+#: /home/noelco/webcontracts/po/../src/webcontracts.vala:34
+msgid "Translate text with Google translator"
+msgstr "Traducir o texto co tradutor de Google"
+
+#: /home/noelco/webcontracts/po/../src/webcontracts.vala:35
+msgid "Upload to imagebin.org"
+msgstr "Enviar a imagebin.org"
+
+#: /home/noelco/webcontracts/po/../src/webcontracts.vala:36
+msgid "Upload to imgur.com"
+msgstr "Enviar a imgur.com"
+
+#: /home/noelco/webcontracts/po/../src/webcontracts.vala:37
+msgid "Upload to pastebin.com"
+msgstr "Enviar a pastebin.com"
+
+#: /home/noelco/webcontracts/po/../src/webcontracts.vala:38
+msgid "Tweet"
+msgstr "Chío"
+
+#: /home/noelco/webcontracts/po/../src/webcontracts.vala:39
+msgid "Update your twitter status"
+msgstr "Actualizar o seu estado no Twitter"
+
+#: /home/noelco/webcontracts/po/../src/webcontracts.vala:40
+msgid "Upload to videobin.org"
+msgstr "Enviar a videobin.org"
+
+#: /home/noelco/webcontracts/po/../src/webcontracts.vala:42
+msgid "Look up on wikipedia"
+msgstr "Atopar na wikipedia"
+
+#: /home/noelco/webcontracts/po/../src/webcontracts.vala:43
+msgid "Upload a video to youtube"
+msgstr "Enviar un vídeo a youtube"
+
+#: /home/noelco/webcontracts/po/../src/webcontracts.vala:95
+msgid "Select a service"
+msgstr "Seleccione un servizo"

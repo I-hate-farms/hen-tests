@@ -1,0 +1,427 @@
+# Turkish translation for beat-box
+# Copyright (c) 2012 Rosetta Contributors and Canonical Ltd 2012
+# This file is distributed under the same license as the beat-box package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2012.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: beat-box\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2012-09-03 11:07+0200\n"
+"PO-Revision-Date: 2012-11-02 00:11+0000\n"
+"Last-Translator: Ferhat TUNÇTAN <ferhattnctn66@gmail.com>\n"
+"Language-Team: Turkish <tr@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2012-11-03 05:28+0000\n"
+"X-Generator: Launchpad (build 16218)\n"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/Facebook.vala:40
+#: /home/noelco/webcontracts/po/../src/Contracts/Flickr.vala:41
+#: /home/noelco/webcontracts/po/../src/Contracts/Twitter.vala:41
+#: /home/noelco/webcontracts/po/../src/Contracts/GooglePlus.vala:42
+#: /home/noelco/webcontracts/po/../src/Contracts/Youtube.vala:40
+msgid "Set Account"
+msgstr "Hesap ayarla"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/Facebook.vala:44
+#: /home/noelco/webcontracts/po/../src/Contracts/Flickr.vala:46
+#: /home/noelco/webcontracts/po/../src/Contracts/Twitter.vala:46
+#: /home/noelco/webcontracts/po/../src/Contracts/GooglePlus.vala:48
+#: /home/noelco/webcontracts/po/../src/Contracts/Youtube.vala:42
+msgid "Current Account:"
+msgstr "Şimdiki Hesap:"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/Flickr.vala:70
+#: /home/noelco/webcontracts/po/../src/Contracts/Twitter.vala:70
+msgid "Confirm PIN"
+msgstr "PIN'i onayla"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/GooglePlus.vala:46
+msgid "The Google+ API does not allow sharing yet!"
+msgstr "Google+ API'si henüz paylaşmaya izin vermiyor!"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/Imagebin.vala:36
+msgid "Nickname"
+msgstr "Takma isim"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/GoogleTranslate.vala:21
+#: /home/noelco/webcontracts/po/../src/webcontracts.vala:33
+msgid "Google Translate"
+msgstr "Google Çeviri"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/GoogleTranslate.vala:34
+msgid "Afrikaans"
+msgstr "Afrikaanca"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/GoogleTranslate.vala:35
+msgid "Albanian"
+msgstr "Arnavutça"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/GoogleTranslate.vala:36
+msgid "Arabic"
+msgstr "Arapça"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/GoogleTranslate.vala:37
+msgid "Armenian"
+msgstr "Ermenice"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/GoogleTranslate.vala:38
+msgid "Azerbaijani"
+msgstr "Azerbeycanca"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/GoogleTranslate.vala:39
+msgid "Basque"
+msgstr "Baskça"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/GoogleTranslate.vala:40
+msgid "Belarusian"
+msgstr "Belarusça"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/GoogleTranslate.vala:41
+msgid "Bengali"
+msgstr "Bengalce"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/GoogleTranslate.vala:42
+msgid "Bulgarian"
+msgstr "Bulgarca"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/GoogleTranslate.vala:43
+msgid "Catalan"
+msgstr "Katalanca"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/GoogleTranslate.vala:44
+msgid "Chinese (Simplified)"
+msgstr "Çince (Basitleştirilmiş)"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/GoogleTranslate.vala:45
+msgid "Chinese (Traditional)"
+msgstr "Çince (Geleneksel)"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/GoogleTranslate.vala:46
+msgid "Croation"
+msgstr "Hırvatça"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/GoogleTranslate.vala:47
+msgid "Czech"
+msgstr "Çekce"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/GoogleTranslate.vala:48
+msgid "Danish"
+msgstr "Danca"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/GoogleTranslate.vala:49
+msgid "Dutch"
+msgstr "Flemenkçe"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/GoogleTranslate.vala:50
+msgid "English"
+msgstr "İngilizce"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/GoogleTranslate.vala:51
+msgid "Estonian"
+msgstr "Estonyaca"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/GoogleTranslate.vala:52
+msgid "Filipino"
+msgstr "Filipince"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/GoogleTranslate.vala:53
+msgid "Finnish"
+msgstr "Fince"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/GoogleTranslate.vala:54
+msgid "French"
+msgstr "Fransızca"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/GoogleTranslate.vala:55
+msgid "Galician"
+msgstr "Galiçyaca"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/GoogleTranslate.vala:56
+msgid "Georgian"
+msgstr "Gürcüce"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/GoogleTranslate.vala:57
+msgid "German"
+msgstr "Almanca"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/GoogleTranslate.vala:58
+msgid "Greek"
+msgstr "Yunan"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/GoogleTranslate.vala:59
+msgid "Gujarati"
+msgstr "Gucaratça"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/GoogleTranslate.vala:60
+msgid "Haitian Creole"
+msgstr "Haitian Creole"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/GoogleTranslate.vala:61
+msgid "Hebrew"
+msgstr "İbranice"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/GoogleTranslate.vala:62
+msgid "Hindi"
+msgstr "Hintçe"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/GoogleTranslate.vala:63
+msgid "Hungarian"
+msgstr "Macarca"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/GoogleTranslate.vala:64
+msgid "Icelandic"
+msgstr "İzlandaca"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/GoogleTranslate.vala:65
+msgid "Indonesian"
+msgstr "Endonezyaca"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/GoogleTranslate.vala:66
+msgid "Irish"
+msgstr "İrlandaca"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/GoogleTranslate.vala:67
+msgid "Italian"
+msgstr "İtalyanca"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/GoogleTranslate.vala:68
+msgid "Japanese"
+msgstr "Japonca"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/GoogleTranslate.vala:69
+msgid "Kannada"
+msgstr "Kannada dili"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/GoogleTranslate.vala:70
+msgid "Korean"
+msgstr "Korece"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/GoogleTranslate.vala:71
+msgid "Latin"
+msgstr "Latince"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/GoogleTranslate.vala:72
+msgid "Latvian"
+msgstr "Letonca"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/GoogleTranslate.vala:73
+msgid "Lithuanian"
+msgstr "Litvanyaca"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/GoogleTranslate.vala:74
+msgid "Macedonian"
+msgstr "Makedonca"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/GoogleTranslate.vala:75
+msgid "Malay"
+msgstr "Malayca"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/GoogleTranslate.vala:76
+msgid "Maltese"
+msgstr "Maltaca"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/GoogleTranslate.vala:77
+msgid "Norwegian"
+msgstr "Norveçce"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/GoogleTranslate.vala:78
+msgid "Persian"
+msgstr "Farsça"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/GoogleTranslate.vala:79
+msgid "Polish"
+msgstr "Lehçe"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/GoogleTranslate.vala:80
+msgid "Portuguese"
+msgstr "Portekizce"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/GoogleTranslate.vala:81
+msgid "Romanian"
+msgstr "Rumence"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/GoogleTranslate.vala:82
+msgid "Russian"
+msgstr "Rusça"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/GoogleTranslate.vala:83
+msgid "Serbian"
+msgstr "Sırpça"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/GoogleTranslate.vala:84
+msgid "Slovak"
+msgstr "Slovakça"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/GoogleTranslate.vala:85
+msgid "Slovenian"
+msgstr "Slovence"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/GoogleTranslate.vala:86
+msgid "Spanish"
+msgstr "ispanyolca"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/GoogleTranslate.vala:87
+msgid "Swahili"
+msgstr "Svahili"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/GoogleTranslate.vala:88
+msgid "Swedish"
+msgstr "İsveçce"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/GoogleTranslate.vala:89
+msgid "Tamil"
+msgstr "Tamilce"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/GoogleTranslate.vala:90
+msgid "Telugu"
+msgstr "Teluguca"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/GoogleTranslate.vala:91
+msgid "Thai"
+msgstr "Tayca"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/GoogleTranslate.vala:92
+msgid "Turkish"
+msgstr "Türkçe"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/GoogleTranslate.vala:93
+msgid "Ukrainian"
+msgstr "Ukraynaca"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/GoogleTranslate.vala:94
+msgid "Urdu"
+msgstr "Urduca"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/GoogleTranslate.vala:95
+msgid "Vitnamese"
+msgstr "Vietnamca"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/GoogleTranslate.vala:96
+msgid "Welsh"
+msgstr "Galce"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/GoogleTranslate.vala:97
+msgid "Yiddish"
+msgstr "Eskenazi dili"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/GoogleTranslate.vala:118
+msgid "Default language"
+msgstr "Varsayılan dil"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/Pastebin.vala:39
+msgid "Never"
+msgstr "Asla"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/Pastebin.vala:40
+msgid "10 minutes"
+msgstr "10 dakika"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/Pastebin.vala:41
+msgid "1 hour"
+msgstr "1 saat"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/Pastebin.vala:42
+msgid "1 day"
+msgstr "1 gün"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/Pastebin.vala:43
+msgid "1 month"
+msgstr "1 ay"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/Pastebin.vala:53
+msgid "Public pastes"
+msgstr "Genel yapıştırmalar"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/Pastebin.vala:55
+msgid "Expire"
+msgstr "Süresini doldur"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/Videobin.vala:32
+msgid "john@smith.com"
+msgstr "john@smith.com"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/Videobin.vala:35
+msgid "Email"
+msgstr "Eposta"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/Imgur.vala:19
+#: /home/noelco/webcontracts/po/../src/Contracts/Wikipedia.vala:17
+#: /home/noelco/webcontracts/po/../src/Contracts/GoogleSearch.vala:17
+msgid "No settings"
+msgstr "Ayarlar yok"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/Wikipedia.vala:7
+#: /home/noelco/webcontracts/po/../src/webcontracts.vala:41
+msgid "Wikipedia"
+msgstr "Vikipedi"
+
+#: /home/noelco/webcontracts/po/../src/Contracts/GoogleSearch.vala:7
+msgid "Google Search"
+msgstr "Google Araması"
+
+#: /home/noelco/webcontracts/po/../src/webcontracts.vala:27
+msgid "Sharing Accounts"
+msgstr "Paylaşılan Hesaplar"
+
+#: /home/noelco/webcontracts/po/../src/webcontracts.vala:28
+msgid "Share at Facebook"
+msgstr "Facebook'da Paylaş"
+
+#: /home/noelco/webcontracts/po/../src/webcontracts.vala:29
+msgid "Upload an image to flickr"
+msgstr "Flickr'a bir resim yükle"
+
+#: /home/noelco/webcontracts/po/../src/webcontracts.vala:30
+msgid "Share at Google+"
+msgstr "Google+'da Paylaş"
+
+#: /home/noelco/webcontracts/po/../src/webcontracts.vala:31
+msgid "Search Google"
+msgstr "Google'da Ara"
+
+#: /home/noelco/webcontracts/po/../src/webcontracts.vala:32
+msgid "Search on the Web with google"
+msgstr "Ağ üzerinde Google ile ara"
+
+#: /home/noelco/webcontracts/po/../src/webcontracts.vala:34
+msgid "Translate text with Google translator"
+msgstr "Metni Google Çeviri ile çevir"
+
+#: /home/noelco/webcontracts/po/../src/webcontracts.vala:35
+msgid "Upload to imagebin.org"
+msgstr "imagebin.org'a yükle"
+
+#: /home/noelco/webcontracts/po/../src/webcontracts.vala:36
+msgid "Upload to imgur.com"
+msgstr "imgur.com'a yükle"
+
+#: /home/noelco/webcontracts/po/../src/webcontracts.vala:37
+msgid "Upload to pastebin.com"
+msgstr "pastebin.com'a yükle"
+
+#: /home/noelco/webcontracts/po/../src/webcontracts.vala:38
+msgid "Tweet"
+msgstr "Tweeter'da paylaş"
+
+#: /home/noelco/webcontracts/po/../src/webcontracts.vala:39
+msgid "Update your twitter status"
+msgstr "Twitter durumunuzu güncelleyin"
+
+#: /home/noelco/webcontracts/po/../src/webcontracts.vala:40
+msgid "Upload to videobin.org"
+msgstr "videobin.org'a yükle"
+
+#: /home/noelco/webcontracts/po/../src/webcontracts.vala:42
+msgid "Look up on wikipedia"
+msgstr "Wikipedia'da ara"
+
+#: /home/noelco/webcontracts/po/../src/webcontracts.vala:43
+msgid "Upload a video to youtube"
+msgstr "Youtube'a bir video yükle"
+
+#: /home/noelco/webcontracts/po/../src/webcontracts.vala:95
+msgid "Select a service"
+msgstr "Bir hizmet seçin"

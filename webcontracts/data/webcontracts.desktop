@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Webcontracts
+Comment=Contracts for web services
+GenericName=WebContractManager
+Exec=webcontracts %U
+Icon=preferences-system-services
+Terminal=false
+Categories=Utilities;

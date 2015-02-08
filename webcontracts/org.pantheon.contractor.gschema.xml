@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist>
+    <schema path="/org/pantheon/contractor/twitter/" id="org.pantheon.Contractor.twitter" gettext-domain="webcontracts">
+        <key name="current-account" type="s">
+            <default>""</default>
+            <summary>The currently used account for tweeting.</summary>
+            <description>The currently used account for tweeting. Should never be set manually.</description>
+        </key>
+        <key name="token" type="s">
+            <default>""</default>
+            <summary></summary>
+            <description></description>
+        </key>
+        <key name="token-secret" type="s">
+            <default>""</default>
+            <summary></summary>
+            <description></description>
+        </key>
+    </schema>
+    <schema path="/org/pantheon/contractor/flickr/" id="org.pantheon.Contractor.flickr" gettext-domain="webcontracts">
+        <key name="current-account" type="s">
+            <default>""</default>
+            <summary>The currently used account for uploading images.</summary>
+            <description>The currently used account for uplading images. Should never be set manually.</description>
+        </key>
+        <key name="token" type="s">
+            <default>""</default>
+            <summary></summary>
+            <description></description>
+        </key>
+        <key name="token-secret" type="s">
+            <default>""</default>
+            <summary></summary>
+            <description></description>
+        </key>
+    </schema>
+    <schema path="/org/pantheon/contractor/facebook/" id="org.pantheon.Contractor.facebook" gettext-domain="webcontracts">
+        <key name="current-account" type="s">
+            <default>""</default>
+            <summary>The currently used account for sharing.</summary>
+            <description>The currently used account for sharing. Should never be set manually.</description>
+        </key>
+        <key name="access-token" type="s">
+            <default>""</default>
+            <summary></summary>
+            <description></description>
+        </key>
+    </schema>
+    <schema path="/org/pantheon/contractor/google-plus/" id="org.pantheon.Contractor.google-plus" gettext-domain="webcontracts">
+        <key name="current-account" type="s">
+            <default>""</default>
+            <summary>The currently used account for sharing.</summary>
+            <description>The currently used account for sharing. Should never be set manually.</description>
+        </key>
+        <key name="access-token" type="s">
+            <default>""</default>
+            <summary></summary>
+            <description></description>
+        </key>
+    </schema>
+    <schema path="/org/pantheon/contractor/youtube/" id="org.pantheon.Contractor.youtube" gettext-domain="webcontracts">
+        <key name="current-account" type="s">
+            <default>""</default>
+            <summary>The currently used account for sharing.</summary>
+            <description>The currently used account for sharing. Should never be set manually.</description>
+        </key>
+        <key name="access-token" type="s">
+            <default>""</default>
+            <summary></summary>
+            <description></description>
+        </key>
+        <key name="refresh-token" type="s">
+            <default>""</default>
+            <summary></summary>
+            <description></description>
+        </key>
+    </schema>
+    <schema path="/org/pantheon/contractor/imagebin/" id="org.pantheon.Contractor.imagebin" gettext-domain="webcontracts">
+        <key name="nickname" type="s">
+            <default>""</default>
+            <summary>The nickname used for sharing images.</summary>
+            <description>The nickname used for sharing images.</description>
+        </key>
+    </schema>
+    <schema path="/org/pantheon/contractor/videobin/" id="org.pantheon.Contractor.videobin" gettext-domain="webcontracts">
+        <key name="email" type="s">
+            <default>""</default>
+            <summary>The email used for storing the video.</summary>
+            <description>The email used for storing the video.</description>
+        </key>
+    </schema>
+    <schema path="/org/pantheon/contractor/google-translate/" id="org.pantheon.Contractor.google-translate" gettext-domain="webcontracts">
+        <key name="default-language" type="s">
+            <default>""</default>
+            <summary>The default language to translate to.</summary>
+            <description>Set the default language to translate to.</description>
+        </key>
+    </schema>
+    <schema path="/org/pantheon/contractor/pastebin/" id="org.pantheon.Contractor.pastebin" gettext-domain="webcontracts">
+        <key name="public-only" type="b">
+            <default>true</default>
+            <summary>Wether pastes will be public.</summary>
+            <description>Shared contracts will be shared public if true or private if false.</description>
+        </key>
+        <key name="expire" type="s">
+            <default>"N"</default>
+            <summary>Time after which a paste expires.</summary>
+            <description>Time after which a paste expires.</description>
+        </key>
+    </schema>
+</schemalist>

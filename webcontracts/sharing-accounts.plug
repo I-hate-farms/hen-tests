@@ -1,0 +1,6 @@
+[sharing-accounts.plug]
+exec=webcontracts
+icon=preferences-desktop-online-accounts
+title=Sharing Accounts
+category=personal
+X-GNOME-Gettext-Domain=webcontracts
