@@ -1,6 +1,9 @@
 #!/bin/bash
 # File history 
-#  - 0.1: update and help
+#  - 0.1: add task update and help
+#  - 0.2: add task build and prepare
+#  - 0.3: add task list
+#  - 0.4: add task rebuild 
 
 OPERATION="build"
 
@@ -60,6 +63,11 @@ do_update () {
 }
 
 do_prepare () {
+      # if the Hen version can't be found, it means that the 
+      # Hen needs to be installed
+      if [ ! -f "${DEST_FOLDER}/Hen-VERSION.txt" ] ; then
+        do_update 
+      fi 
       echo -e "${white}Preparing your build ...${NC}"
       if [ -d ${BUILD_FOLDER} ] ; then
         rm -rf ${BUILD_FOLDER}
@@ -70,13 +78,21 @@ do_prepare () {
 }
 
 do_build () {
-      echo -e "${white}Building your application ...${NC}"
       if [ ! -d ${BUILD_FOLDER} ] ; then
         do_prepare 
       fi 
+      echo -e "${white}Building your application ...${NC}"
       cd ${BUILD_FOLDER}
       make 
       cd ..        
+}
+
+do_rebuild () {
+  echo -e "${white}Regenerating your build ...${NC}"
+  if [ -d ${BUILD_FOLDER} ] ; then
+    rm -rf ${BUILD_FOLDER}
+  fi 
+  do_build 
 }
 
 do_help () {
@@ -84,9 +100,23 @@ do_help () {
     	LOCAL_VERSION=`cat ${DEST_FOLDER}/Hen-VERSION.txt`
     	echo -e "${white}Hen ${LOCAL_VERSION}${NC}"
     	echo ""
-    fi 
-	cat ./cmake/Hen-HELP.txt
+      cat ./cmake/Hen-HELP.txt
+  else
+    echo -e "${white}No help is available${NC}. Please update hen with: $0 update"
+  fi 
 }
+
+do_list () {
+  echo -e "${white}Hen${NC} defines the following make tasks"
+  echo -e "  - ${white}[default]${NC} : build your application along with extra files if applicable (desktop, vapi, pc, deps...)"
+  echo -e "  - ${white}install${NC} : install your application to the previously defined PREFIX (./usr by default)"
+  echo -e "  - ${white}pot${NC} : generates the translation files in the po folder"
+  echo "" 
+  echo "You can invoke those tasks in the ./build folder: "
+  echo "  cd build"
+  echo "  make pot"
+}
+
 
 case "$OPERATION" in
    "update") do_update  
@@ -94,9 +124,13 @@ case "$OPERATION" in
    "prepare") do_prepare
    ;;
    "build")do_build
+   ;;   
+   "list")do_list
    ;;
+   "rebuild")do_rebuild
+   ;;  
    "help")do_help
-   ;;
+   ;; 
    "--help")do_help
    ;;     
    "--?")do_help
