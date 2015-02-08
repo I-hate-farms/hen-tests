@@ -8,6 +8,10 @@ if( NOT DIR_ELEMENTARY_CMAKE )
     set(DIR_ELEMENTARY_CMAKE ${CMAKE_CURRENT_LIST_DIR})
 endif()
 
+if( NOT DIR_ELEMENTARY_TEMPLATES )
+    set(DIR_ELEMENTARY_TEMPLATES ${DIR_ELEMENTARY_CMAKE}/templates)
+endif()
+
 macro (read_dependency_file)
     if( NOT DEPEND_FILE_READ )
 
@@ -15,7 +19,7 @@ macro (read_dependency_file)
         set( list_pc_packages "")
 
         set( depend_file "${DIR_ELEMENTARY_CMAKE}/dependencies.list")
-        message ("Reading ${depend_file}")
+        #message ("Reading ${depend_file}")
 
         file(STRINGS ${depend_file} file_content)
         set (line_number 0)
@@ -103,4 +107,33 @@ macro (get_pc_package vala_package pc_package )
     #if( NOT pc_package)
     #    set( pc_package ${vala_package} )
     #endif()
+endmacro()
+
+macro(add_local_package vala_package dependencies)
+    list (APPEND list_vala_local_packages ${vala_package})
+    string (STRIP ${dependencies} deps)
+    list (APPEND list_vala_local_packages_deps ${deps})
+endmacro()
+
+# Not used!!!
+macro (is_vala_package_local package_name is_local)
+     if( package_name STREQUAL "vala-stacktrace")
+        set (is_local "true")
+    else ()
+        set (is_local "false")
+    endif()
+endmacro()
+
+macro (local_check_package vala_package)
+
+    list(FIND list_vala_local_packages ${vala_package} index)
+
+    if( index GREATER -1 )
+        list(GET list_vala_local_packages_deps ${index} deps)
+        set (DEPS_LIBRARIES ${DEPS_LIBRARIES} "-l${vala_package}")
+        set(VALA_PACKAGES ${VALA_PACKAGES} "${deps}")
+    else ()
+        message ( FATAL_ERROR "${FatalColor}Local vala package not found${NC}: ${vala_package}") 
+    endif()
+
 endmacro()

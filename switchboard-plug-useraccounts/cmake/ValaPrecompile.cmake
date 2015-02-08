@@ -30,9 +30,9 @@
 
 # Bundle version: 0.9
 #
-# File version  : 1.0
 # File History:
-#    - Alpha 1
+#    - 0.1 :
+#    - 0.2 : implement *.vala and *.c files for elementary.cmake
 
 include(ParseArguments)
 find_package(Vala REQUIRED)
@@ -124,7 +124,10 @@ macro(vala_precompile output target_name)
     parse_arguments(ARGS "TARGET;PACKAGES;OPTIONS;DIRECTORY;GENERATE_GIR;GENERATE_SYMBOLS;GENERATE_HEADER;GENERATE_VAPI;CUSTOM_VAPIS" "" ${ARGN})
 
     if(ARGS_DIRECTORY)
-        set(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/${ARGS_DIRECTORY})
+        # OLD set(DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/${ARGS_DIRECTORY})
+        # CARL changed for elementary.cmake
+        message ("THREE")
+        set(DIRECTORY ${ARGS_DIRECTORY})
     else(ARGS_DIRECTORY)
         set(DIRECTORY ${CMAKE_CURRENT_BINARY_DIR})
     endif(ARGS_DIRECTORY)
@@ -149,10 +152,23 @@ macro(vala_precompile output target_name)
         string(REPLACE ".vala" ".c" src ${src})
         string(REPLACE ".gs" ".c" src ${src})
         if(${IS_MATCHED} MATCHES "/")
+            # message ("ONE ${src}")
             get_filename_component(VALA_FILE_NAME ${src} NAME)
-            set(out_file "${CMAKE_CURRENT_BINARY_DIR}/${VALA_FILE_NAME}")
-            list(APPEND out_files "${CMAKE_CURRENT_BINARY_DIR}/${VALA_FILE_NAME}")
+            # CARL fix the case when the vala files are passed
+            # as absolute paths and are in a subfolder of CMAKE_CURRENT_SOURCE_DIR
+            # For elementary.cmake when dealing with *.vala
+            string(FIND ${src} ${CMAKE_CURRENT_SOURCE_DIR} pos)
+            if( pos GREATER -1 )
+                # The file is in the current source dir (or a sub folder)
+                string( REPLACE  ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_BINARY_DIR} gen_src ${src})
+            else()
+                # The file has been generated elsewhere
+                set( gen_src "${CMAKE_CURRENT_BINARY_DIR}/${VALA_FILE_NAME}")
+            endif()
+            set(out_file "${gen_src}")
+            list(APPEND out_files "${gen_src}")
         else()
+            #message ("TWO")
             set(out_file "${DIRECTORY}/${src}")
             list(APPEND out_files "${DIRECTORY}/${src}")
         endif()
@@ -174,9 +190,11 @@ macro(vala_precompile output target_name)
     set(vapi_arguments "")
     if(ARGS_GENERATE_VAPI)
         list(APPEND out_files "${DIRECTORY}/${ARGS_GENERATE_VAPI}.vapi")
+        # CARL list(APPEND out_files "${ARGS_GENERATE_VAPI}.vapi")
         list(APPEND out_files_display "${ARGS_GENERATE_VAPI}.vapi")
         set(vapi_arguments "--library=${ARGS_GENERATE_VAPI}" "--vapi=${ARGS_GENERATE_VAPI}.vapi")
-
+        # CARL set(vapi_arguments "--library=${target_name}" "--vapi=${ARGS_GENERATE_VAPI}.vapi")
+        
         # Header and internal header is needed to generate internal vapi
         if (NOT ARGS_GENERATE_HEADER)
             set(ARGS_GENERATE_HEADER ${ARGS_GENERATE_VAPI})
@@ -218,7 +236,7 @@ macro(vala_precompile output target_name)
     # Workaround for a bug that would make valac run twice. This file is written
     # after the vala compiler generates C source code.
     set(OUTPUT_STAMP ${CMAKE_CURRENT_BINARY_DIR}/${target_name}_valac.stamp)
-
+    #message ("in_files ${in_files}")
     add_custom_command(
     OUTPUT
         ${OUTPUT_STAMP}
@@ -248,7 +266,7 @@ macro(vala_precompile output target_name)
         "Generating ${out_files_display}"
     ${gircomp_command}
     )
-
+    #message ("OUT: ${out_files} ")
     # This command will be run twice for some reason (pass a non-empty string to COMMENT
     # in order to see it). Since valac is not executed from here, this won't be a problem.
     add_custom_command(OUTPUT ${out_files} DEPENDS ${OUTPUT_STAMP} COMMENT "")
