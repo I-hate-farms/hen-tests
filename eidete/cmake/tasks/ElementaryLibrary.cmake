@@ -1,20 +1,25 @@
+# Bundle version: 0.9
+#
+# File History:
+#    - 0.1 : refactoring
+#    - 0.2 : fix glib.h: No such file or directory (vala-stacktrace working)
 
 macro(build_elementary_library)
     parse_arguments(ARGS "BINARY_NAME;TITLE;VERSION;RELEASE_NAME;SOVERSION;LINKING;SOURCE_PATH;VALA_FILES;C_FILES;VALA_DEFINES;PACKAGES;C_DEFINES;SCHEMA;VALA_OPTIONS;C_OPTIONS" "" ${ARGN})
 
     if( NOT ARGS_LINKING)
-        message( FATAL_ERROR "You must specify a LINKING: static or shared.")
+        message( FATAL_ERROR "${FatalColor}You must specify a LINKING: static or shared${NC}.")
     endif()
 
     if( NOT ARGS_LINKING STREQUAL "shared" AND NOT ARGS_LINKING STREQUAL "static")
-        message( FATAL_ERROR "The value LINKING must be either static or shared.")
+        message( FATAL_ERROR "${FatalColor}The value LINKING must be either static or shared${NC}.")
     endif()
 
     set (DATADIR "")
     set (PKGDATADIR "")
     set (GETTEXT_PACKAGE "${ARGS_BINARY_NAME}")
 
-    prepare_elementary (
+    hen_build (
         BINARY_NAME
             ${ARGS_BINARY_NAME}
         TITLE
@@ -52,13 +57,14 @@ macro(build_elementary_library)
     # TODO fix the output path
     configure_file (${DIR_ELEMENTARY_TEMPLATES}/lib.pc.cmake ${CMAKE_BINARY_DIR}/${ARGS_BINARY_NAME}.pc)
     configure_file (${DIR_ELEMENTARY_TEMPLATES}/lib.deps.cmake ${CMAKE_BINARY_DIR}/${ARGS_BINARY_NAME}.deps)
+    add_local_package (${ARGS_BINARY_NAME} ${COMPLETE_DIST_PC_PACKAGES} )
 
     if( ARGS_LINKING STREQUAL "static")
         add_library (${ARGS_BINARY_NAME} STATIC ${VALA_C} ${C_FILES})
     else()
         add_library (${ARGS_BINARY_NAME} SHARED ${VALA_C} ${C_FILES})
         if( NOT ARGS_SOVERSION)
-            message ("The parameter SO_VERSION is not specified so '0' is used.")
+            message ("${MessageColor}The parameter SO_VERSION is not specified${NC} so '0' is used.")
             set( ARGS_SOVERSION "0")
         endif()
 
@@ -68,7 +74,6 @@ macro(build_elementary_library)
             SOVERSION ${ARGS_SOVERSION}
         )
     endif()
-
     target_link_libraries (${ARGS_BINARY_NAME} ${DEPS_LIBRARIES})
 
     install_elementary_library (${ARGS_BINARY_NAME} ${ARGS_LINKING})

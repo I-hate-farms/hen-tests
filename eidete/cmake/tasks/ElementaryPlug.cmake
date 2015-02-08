@@ -2,14 +2,14 @@ macro(build_elementary_plug)
     parse_arguments(ARGS "BINARY_NAME;TITLE;VERSION;RELEASE_NAME;PLUG_CATEGORY;SOURCE_PATH;VALA_FILES;C_FILES;PACKAGES;C_DEFINES;VALA_DEFINES;SCHEMA;VALA_OPTIONS;C_OPTIONS" "" ${ARGN})
 
     if( NOT ARGS_PLUG_CATEGORY)
-        message( FATAL_ERROR "You must specify a PLUG_CATEGORY: personal, hardware, network or system.")
+        message( FATAL_ERROR "${FatalColor}You must specify a PLUG_CATEGORY${NC}: personal, hardware, network or system.")
     endif()
 
     set (DATADIR "${CMAKE_INSTALL_FULL_LIBDIR}/switchboard")
     set (PKGDATADIR "${DATADIR}/${ARGS_PLUG_CATEGORY}/${ARGS_BINARY_NAME}")
     set (GETTEXT_PACKAGE "${ARGS_BINARY_NAME}")
 
-    prepare_elementary (
+    hen_build (
         BINARY_NAME
             ${ARGS_BINARY_NAME}
         TITLE

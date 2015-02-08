@@ -6,7 +6,7 @@ macro(build_elementary_cli)
     set (PKGDATADIR "")
     set (GETTEXT_PACKAGE "${ARGS_BINARY_NAME}")
 
-    prepare_elementary (
+    hen_build (
         BINARY_NAME
             ${ARGS_BINARY_NAME}
         TITLE
@@ -38,6 +38,9 @@ macro(build_elementary_cli)
     )
 
     add_executable (${ARGS_BINARY_NAME} ${VALA_C} ${C_FILES})
+    foreach( vala_local_pkg ${list_vala_local_packages})
+        add_dependencies (${ARGS_BINARY_NAME}  "${vala_local_pkg}")
+    endforeach()
     target_link_libraries (${ARGS_BINARY_NAME} ${DEPS_LIBRARIES})
 
     install_elementary_cli (${ARGS_BINARY_NAME})

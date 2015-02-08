@@ -19,6 +19,7 @@
 #    - 0.15: implement *.vala and *.c files
 #    - 0.16: support uninstall
 #    - 0.17: refactor
+#    - 0.18: color, glib 2.23 by default
 
 # RELEASE
 # TODO * fix po file generation
@@ -79,9 +80,31 @@ if( NOT DIR_ELEMENTARY_TEMPLATES )
     set(DIR_ELEMENTARY_TEMPLATES ${DIR_ELEMENTARY_CMAKE}/templates)
 endif()
 
+if(NOT WIN32)
+  string(ASCII 27 Esc)
+  set(NC          "${Esc}[m")
+  set(ColourBold  "${Esc}[1m")
+  set(Red         "${Esc}[31m")
+  set(Green       "${Esc}[32m")
+  set(Yellow      "${Esc}[33m")
+  set(Blue        "${Esc}[34m")
+  set(Magenta     "${Esc}[35m")
+  set(Cyan        "${Esc}[36m")
+  set(White       "${Esc}[37m")
+  set(BoldRed     "${Esc}[1;31m")
+  set(BoldGreen   "${Esc}[1;32m")
+  set(BoldYellow  "${Esc}[1;33m")
+  set(BoldBlue    "${Esc}[1;34m")
+  set(BoldMagenta "${Esc}[1;35m")
+  set(BoldCyan    "${Esc}[1;36m")
+  set(BoldWhite   "${Esc}[1;37m")
+  set(FatalColor  "${BoldRed}")
+  set(MessageColor "${BoldWhite}")
+endif()
+
 set (SOURCE_PATHS "")
 
-#project(elementary_build)
+# project(hen_build)
 
 macro(create_uninstall_target )
     # uninstall target
@@ -116,11 +139,11 @@ macro(build_translations)
     #endif()
 endmacro()
 
-macro(prepare_elementary)
+macro(hen_build)
     parse_arguments(ARGS "BINARY_NAME;TITLE;VERSION;RELEASE_NAME;SOURCE_PATH;VALA_FILES;C_FILES;PACKAGES;C_DEFINES;VALA_DEFINES;SCHEMA;VALA_OPTIONS;CONFIG_NAME;LINKING;C_OPTIONS" "" ${ARGN})
 
     if(CMAKE_INSTALL_PREFIX_INITIALIZED_TO_DEFAULT)
-        message( "CMAKE_INSTALL_PREFIX is not set. '/usr' is used by default")
+        message( "${MessageColor}CMAKE_INSTALL_PREFIX is not set${NC}. '/usr' is used by default")
         set (CMAKE_INSTALL_PREFIX "/usr")
     endif()
 
@@ -130,14 +153,15 @@ macro(prepare_elementary)
         endif()
     else()
         if(NOT CMAKE_BUILD_TYPE STREQUAL BUILD_TYPE)
-            message( "CMAKE_BUILD_TYPE is set to ${CMAKE_BUILD_TYPE}. The value of BUILD_TYPE (${BUILD_TYPE}) is ignored.")
+            message( "${MessageColor}CMAKE_BUILD_TYPE is set to ${CMAKE_BUILD_TYPE}${NC}. The value of BUILD_TYPE (${BUILD_TYPE}) is ignored.")
         endif()
     endif()
 
     if(ARGS_BINARY_NAME)
+        message( "${FatalColor}Processing ${ARGS_BINARY_NAME}${NC}")
         project (${ARGS_BINARY_NAME})
     else()
-        message( FATAL_ERROR "You must specify a BINARY_NAME")
+        message( FATAL_ERROR "${FatalColor}You must specify a BINARY_NAME${NC}")
     endif()
 
     # TODO handle the case where the source is not precised
@@ -145,7 +169,7 @@ macro(prepare_elementary)
         list(APPEND SOURCE_PATHS ${ARGS_SOURCE_PATH})
         list(REMOVE_DUPLICATES SOURCE_PATHS)
     else()
-        message ("Error, you must provide a SOURCE_PATH argument")
+        message( FATAL_ERROR "${FatalColor}Error, you must provide a SOURCE_PATH argument${NC}")
     endif()
 
     # Add the source path to the vala files
@@ -183,13 +207,13 @@ macro(prepare_elementary)
     if(ARGS_VERSION)
         set (ELEM_VERSION ${ARGS_VERSION})
     else()
-        message( FATAL_ERROR "You must specify a VERSION. Example: 1.0")
+        message( FATAL_ERROR "${FatalColor}You must specify a VERSION${NC}. Example: 1.0")
     endif()
 
     if(ARGS_TITLE)
         set (ELEM_TITLE ${ARGS_TITLE})
     else()
-        message( FATAL_ERROR "You must specify a TITLE. Example: \"My application\"")
+        message( FATAL_ERROR "${FatalColor}You must specify a TITLE${NC}. Example: \"My application\"")
     endif()
 
     # Add schema
@@ -199,7 +223,7 @@ macro(prepare_elementary)
 
     # Checking vala version
     if(NOT VALA_VERSION_MIN)
-        message ("Using Vala 0.26.0 as minimum")
+        message ("${MessageColor}Using Vala 0.26.0 as minimum${NC}")
         SET(VALA_VERSION_MIN "0.26.0" )
     endif()
     find_package (Vala REQUIRED)
@@ -232,8 +256,24 @@ macro(prepare_elementary)
         add_definitions ("${opt}")
     endforeach()
 
+    # Sometimes glib is missing. We're adding it each time to be on the safe side
+    # Is this still useful?
+    #list( APPEND ARGS_PACKAGES "glib-2.0")
+
+    # If the options already have the option ...
+    set (EXTRA_VALA_OPTIONS "")
+    string(FIND "${ARGS_VALA_OPTIONS}" "--target-glib" index)
+    if( index GREATER -1 )
+        # ... we display a warning
+        message( "${MessageColor}You don't need to precise '--target-glib 2.32'${NC} as it is added by default.")
+    else()
+        # By default the new glibc is used: 2.32
+        set( EXTRA_VALA_OPTIONS "--target-glib=2.32" )
+    endif()
+    
     # Handle the packges
     set (VALA_PACKAGES "")
+    set (VALA_LOCAL_PACKAGES "")
     # Used in libs.pc.make
     set (COMPLETE_DIST_PC_PACKAGES "")
     # Used in libs.deps.make
@@ -246,6 +286,7 @@ macro(prepare_elementary)
         # return "true" if package is in debian repo
         is_vala_package_in_debian (${vala_package} in_debian)
 
+        is_vala_package_local (${vala_package} is_local)
         #message ("DEP ${vala_package} ${pc_package}")
 
         if(vala_package STREQUAL "posix" OR NOT in_debian STREQUAL "true" OR vala_package STREQUAL "linux")
@@ -266,9 +307,13 @@ macro(prepare_elementary)
 
         # TODO Handle threading better with the options etc
         # TODO test this
-        if( NOT vala_package STREQUAL "gthread-2.0")
+        if( NOT vala_package STREQUAL "gthread-2.0"  )
             set(VALA_PACKAGES ${VALA_PACKAGES} ${vala_package})
         endif()
+
+        #if( is_local STREQUAL "true" )
+        #    set(VALA_LOCAL_PACKAGES ${VALA_LOCAL_PACKAGES} "${vala_package}.vapi")
+        #endif()
     endforeach()
 
     set (DEPS_CFLAGS "")
@@ -282,10 +327,13 @@ macro(prepare_elementary)
         link_libraries (${DEPS_LIBRARIES})
         link_directories (${DEPS_LIBRARY_DIRS})
     endif()
-    # TOOD Add vapi folder if present
-    #message (" DEPS_CFLAGS : ${DEPS_CFLAGS}")
-    #message (" DEPS_LIBRARIES: ${DEPS_LIBRARIES}")
-    #message (" DEPS_LIBRARY_DIRS: ${DEPS_LIBRARY_DIRS}")
+    foreach( vala_local_pkg ${list_vala_local_packages})
+        local_check_package ("${vala_local_pkg}")
+    endforeach()
+    # TODO Add vapi folder if present
+    message (" DEPS_CFLAGS : '${DEPS_CFLAGS}'")
+    message (" DEPS_LIBRARIES: '${DEPS_LIBRARIES}'")
+    message (" DEPS_LIBRARY_DIRS: '${DEPS_LIBRARY_DIRS}'")
 
     # Generate config file
     set (ELEM_RELEASE_NAME ${ARGS_RELEASE_NAME})
@@ -293,10 +341,21 @@ macro(prepare_elementary)
         set (CONFIG_FILE /tmp/config-${ARGS_BINARY_NAME}.vala)
         configure_file (${DIR_ELEMENTARY_TEMPLATES}/${ARGS_CONFIG_NAME} ${CONFIG_FILE})
     endif()
-
+    
     if (ARGS_LINKING)
         set( LIBRARY_NAME  ${ARGS_BINARY_NAME})
-
+        #message ("YYY: ${CMAKE_CURRENT_LIST_DIR}")
+         #message ("YYY: ${CMAKE_FILES_DIRECTORY}")
+         #message ("YYY: ${CMAKE_CURRENT_BINARY_DIR}")
+         
+         #message ("YYY: ${EXECUTABLE_OUTPUT_PATH}")
+         set( OUTPUT_VAPI_PATH "${CMAKE_CURRENT_BINARY_DIR}${CMAKE_FILES_DIRECTORY}/${ARGS_BINARY_NAME}.dir")
+         #message ("AAA: ${OUTPUT_VAPI_PATH}")
+         #message ("BBB: ${OUTPUT_VAPI_PATH}/${LIBRARY_NAME}.vapi") 
+         # Store the vapi dirs so they can be used by other sub projects that might use
+         # the library
+         #list (APPEND VAPI_INCLUDE_DIR "${OUTPUT_VAPI_PATH}")
+        #add_local_package (${ARGS_BINARY_NAME}, ${OUTPUT_VAPI_PATH} )
         # Precompile vala files for library
         vala_precompile (VALA_C ${ARGS_BINARY_NAME}
             ${VALA_FILES}
@@ -310,30 +369,43 @@ macro(prepare_elementary)
             --vapidir=${CMAKE_BINARY_DIR}
             --vapidir=${CMAKE_CURRENT_SOURCE_DIR}/vapi
             --vapi-comments
+            ${EXTRA_VALA_OPTIONS}
             ${VALA_DEFINES}
             ${ARGS_VALA_OPTIONS}
         # For libraries
         GENERATE_VAPI
             ${LIBRARY_NAME}
+            #${OUTPUT_VAPI_PATH}/${LIBRARY_NAME}
         GENERATE_HEADER
             ${LIBRARY_NAME}
         )
         set( ELEM_VAPI_DIR ${CMAKE_BINARY_DIR})
 
     else()
+        #set( VALA_INCLUDE_VAPI_DIR "")
+        #foreach(vapi_dir "${VAPI_INCLUDE_DIR}")
+        #    set( VALA_INCLUDE_VAPI_DIR ${VALA_INCLUDE_VAPI_DIR} "--vapidir=${vapi_dir}")
+        #endforeach() 
+        #message ("VALA_INCLUDE_VAPI_DIR: ${VALA_INCLUDE_VAPI_DIR}")
         # Precompile vala files for app
         vala_precompile (VALA_C ${ARGS_BINARY_NAME}
             ${VALA_FILES}
             ${CONFIG_FILE}
         PACKAGES
             ${VALA_PACKAGES}
+        #CUSTOM_VAPIS
+            #/home/cran/Documents/Projects/i-hate-zoos/hen-tests/vala-stacktrace/build/CMakeFiles/vala-stacktrace.dir/vala-stacktrace.vapi
+            #${VALA_LOCAL_PACKAGES}
         OPTIONS
             # TODO : deprecated ??
             --thread
             # TODO
             --vapidir=${CMAKE_BINARY_DIR}
             --vapidir=${CMAKE_CURRENT_SOURCE_DIR}/vapi
+            #${VALA_INCLUDE_VAPI_DIR}
+            #--vapidir=/home/cran/Documents/Projects/i-hate-zoos/hen-tests/vala-stacktrace/build/CMakeFiles/vala-stacktrace.dir
             ${VALA_DEFINES}
+            ${EXTRA_VALA_OPTIONS}
             ${ARGS_VALA_OPTIONS}
         )
     endif()
@@ -341,6 +413,7 @@ macro(prepare_elementary)
     # message ("VALA_C: ${VALA_C}")
     # Build files ${ARGS_SOURCE_PATH}
     include_directories (${CMAKE_CURRENT_SOURCE_DIR})
+
     #include_directories (${ARGS_SOURCE_PATH})
 endmacro()
 
