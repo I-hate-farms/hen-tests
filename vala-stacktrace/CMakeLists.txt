@@ -8,7 +8,7 @@ set (VALA_VERSION_MIN "0.26")
 set (BUILD_TYPE "Release")
 #set (DEBIAN_PACKAGE "lib-vala-stracktrace-dev")
 
-build_elementary_library (
+library (
     BINARY_NAME
         vala-stacktrace
     TITLE
@@ -26,7 +26,7 @@ build_elementary_library (
         linux
 )
 
-build_elementary_cli (
+console_application (
     BINARY_NAME
         error_sigtrap
     TITLE

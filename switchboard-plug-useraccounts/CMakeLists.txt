@@ -11,7 +11,7 @@ set (BUILD_TYPE "Release")
 # adding the vapi dir, po folder automatically if they
 # exist
 # Add the system deps: granite, switchboard and gkt3.0
-build_elementary_plug (
+elementary_plug (
     BINARY_NAME
         switchboard-plug-useraccounts
     TITLE

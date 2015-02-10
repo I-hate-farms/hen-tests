@@ -1,13 +1,13 @@
 cmake_minimum_required (VERSION 2.8)
 cmake_policy (VERSION 2.8)
 list (APPEND CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake)
-include (Elementary)
+include (Hen)
 
 set (VALA_VERSION_MIN "0.26")
 
 set (BUILD_TYPE "Release")
 
-build_elementary_plug (
+elementary_plug (
     BINARY_NAME
         sharing-accounts
     TITLE
@@ -44,7 +44,7 @@ build_elementary_plug (
         org.pantheon.contractor.gschema.xml
 )
 
-build_elementary_app (
+application (
     BINARY_NAME
         webcontracts
     TITLE

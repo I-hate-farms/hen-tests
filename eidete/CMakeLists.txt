@@ -7,7 +7,7 @@ set (VALA_VERSION_MIN "0.26")
 
 set (BUILD_TYPE "Release")
 
-build_elementary_app (
+application (
     BINARY_NAME
         eidete
     TITLE
@@ -41,7 +41,7 @@ build_elementary_app (
         --enable-experimental
 )
 
-build_elementary_contract (
+elementary_contract (
     BINARY_NAME
         videobin-uploader
     TITLE

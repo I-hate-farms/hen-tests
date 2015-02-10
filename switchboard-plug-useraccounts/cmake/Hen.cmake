@@ -21,6 +21,7 @@
 #    - 0.17: refactor
 #    - 0.18: color, glib 2.23 by default
 #    - 0.19: support library with depending app (vala-stacktrace)
+#    - 0.20: support library with depending app (vala-stacktrace+ox)
 
 # RELEASE
 # TODO * fix po file generation
@@ -64,12 +65,12 @@ include (GNUInstallDirs)
 include (GSettings)
 include (Dependencies)
 
-include (tasks/ElementaryApp)
-include (tasks/ElementaryPlug)
-include (tasks/ElementaryCli)
-include (tasks/ElementaryContract)
-include (tasks/ElementaryLibrary)
+include (tasks/Application)
+include (tasks/ConsoleApplication)
+include (tasks/Library)
 
+include (tasks/ElementaryPlug)
+include (tasks/ElementaryContract)
 # Comment this out to enable C compiler warnings
 add_definitions (-w)
 
@@ -83,24 +84,25 @@ endif()
 
 if(NOT WIN32)
   string(ASCII 27 Esc)
-  set(NC          "${Esc}[m")
-  set(ColourBold  "${Esc}[1m")
-  set(Red         "${Esc}[31m")
-  set(Green       "${Esc}[32m")
-  set(Yellow      "${Esc}[33m")
-  set(Blue        "${Esc}[34m")
-  set(Magenta     "${Esc}[35m")
-  set(Cyan        "${Esc}[36m")
-  set(White       "${Esc}[37m")
-  set(BoldRed     "${Esc}[1;31m")
-  set(BoldGreen   "${Esc}[1;32m")
-  set(BoldYellow  "${Esc}[1;33m")
-  set(BoldBlue    "${Esc}[1;34m")
-  set(BoldMagenta "${Esc}[1;35m")
-  set(BoldCyan    "${Esc}[1;36m")
-  set(BoldWhite   "${Esc}[1;37m")
-  set(FatalColor  "${BoldRed}")
+  set(NC           "${Esc}[m")
+  set(ColourBold   "${Esc}[1m")
+  set(Red          "${Esc}[31m")
+  set(Green        "${Esc}[32m")
+  set(Yellow       "${Esc}[33m")
+  set(Blue         "${Esc}[34m")
+  set(Magenta      "${Esc}[35m")
+  set(Cyan         "${Esc}[36m")
+  set(White        "${Esc}[37m")
+  set(BoldRed      "${Esc}[1;31m")
+  set(BoldGreen    "${Esc}[1;32m")
+  set(BoldYellow   "${Esc}[1;33m")
+  set(BoldBlue     "${Esc}[1;34m")
+  set(BoldMagenta  "${Esc}[1;35m")
+  set(BoldCyan     "${Esc}[1;36m")
+  set(BoldWhite    "${Esc}[1;37m")
+  set(FatalColor   "${BoldRed}")
   set(MessageColor "${BoldWhite}")
+  set(WarningColor "${BoldYellow}")  
 endif()
 
 set (SOURCE_PATHS "")
@@ -159,7 +161,9 @@ macro(hen_build)
     endif()
 
     if(ARGS_BINARY_NAME)
+        message ("")
         message( "${MessageColor}Creating build for ${ARGS_BINARY_NAME}...${NC}")
+        message ("----------")
         project (${ARGS_BINARY_NAME})
     else()
         message( FATAL_ERROR "${FatalColor}You must specify a BINARY_NAME${NC}")
@@ -266,75 +270,16 @@ macro(hen_build)
     string(FIND "${ARGS_VALA_OPTIONS}" "--target-glib" index)
     if( index GREATER -1 )
         # ... we display a warning
-        message( "${MessageColor}You don't need to precise '--target-glib 2.32'${NC} as it is added by default.")
+        message( "${WarningColor}You don't need to precise '--target-glib 2.32'${NC} as it is added by default.")
     else()
         # By default the new glibc is used: 2.32
         set( EXTRA_VALA_OPTIONS "--target-glib=2.32" )
     endif()
     
-    # Handle the packges
-    set (VALA_PACKAGES "")
-    set (VALA_LOCAL_PACKAGES "")
-    # Used in libs.pc.make
-    set (COMPLETE_DIST_PC_PACKAGES "")
-    # Used in libs.deps.make
-    set (ELEM_DEPS_PC_PACKAGES "")
-    foreach(vala_package ${ARGS_PACKAGES})
-
-        set (pc_package "")
-        get_pc_package (${vala_package} pc_package)
-        set (in_debian "")
-        # return "true" if package is in debian repo
-        is_vala_package_in_debian (${vala_package} in_debian)
-
-        is_vala_package_local (${vala_package} is_local)
-        #message ("DEP ${vala_package} ${pc_package}")
-
-        if(vala_package STREQUAL "posix" OR NOT in_debian STREQUAL "true" OR vala_package STREQUAL "linux")
-            # message ("Ignoring checking for ${pkg}")
-            list(APPEND vapi_packages "${vala_package}")
-        else()
-            # message ("Adding checked pkg ${pkg}")
-            list(APPEND checked_pc_packages "${pc_package}")
-        endif()
-
-        # Posix and linux are vala only packages without
-        # c libraries -> they should be excluded from the pc and
-        # deps files
-        if(in_debian STREQUAL "true" AND NOT vala_package STREQUAL "linux" AND NOT vala_package STREQUAL "posix")
-            set(COMPLETE_DIST_PC_PACKAGES " ${COMPLETE_DIST_PC_PACKAGES} ${pc_package}")
-            set(ELEM_DEPS_PC_PACKAGES  "${ELEM_DEPS_PC_PACKAGES}${pc_package}\n")
-        endif()
-
-        # TODO Handle threading better with the options etc
-        # TODO test this
-        if( NOT vala_package STREQUAL "gthread-2.0"  )
-            set(VALA_PACKAGES ${VALA_PACKAGES} ${vala_package})
-        endif()
-
-        #if( is_local STREQUAL "true" )
-        #    set(VALA_LOCAL_PACKAGES ${VALA_LOCAL_PACKAGES} "${vala_package}.vapi")
-        #endif()
-    endforeach()
-
-    set (DEPS_CFLAGS "")
-    set (DEPS_LIBRARIES "")
-    set (DEPS_LIBRARY_DIRS "")
-
-    #message ("Checked ${checked_pc_packages}")
-    if( checked_pc_packages )
-        pkg_check_modules (DEPS REQUIRED ${checked_pc_packages})
-        add_definitions (${DEPS_CFLAGS})
-        link_libraries (${DEPS_LIBRARIES})
-        link_directories (${DEPS_LIBRARY_DIRS})
-    endif()
-    foreach( vala_local_pkg ${list_vala_local_packages})
-        local_check_package ("${vala_local_pkg}")
-    endforeach()
+    handle_packages () 
+    # if you don't mind keeping the naming convention 
+    # you could do that in a loop for all variables too e.g. foreach(TYPE CFLAGS LIBRARIES ...) 
     # TODO Add vapi folder if present
-    #message (" DEPS_CFLAGS : '${DEPS_CFLAGS}'")
-    #message (" DEPS_LIBRARIES: '${DEPS_LIBRARIES}'")
-    #message (" DEPS_LIBRARY_DIRS: '${DEPS_LIBRARY_DIRS}'")
 
     # Generate config file
     set (ELEM_RELEASE_NAME ${ARGS_RELEASE_NAME})
@@ -345,18 +290,6 @@ macro(hen_build)
     
     if (ARGS_LINKING)
         set( LIBRARY_NAME  ${ARGS_BINARY_NAME})
-        #message ("YYY: ${CMAKE_CURRENT_LIST_DIR}")
-         #message ("YYY: ${CMAKE_FILES_DIRECTORY}")
-         #message ("YYY: ${CMAKE_CURRENT_BINARY_DIR}")
-         
-         #message ("YYY: ${EXECUTABLE_OUTPUT_PATH}")
-         set( OUTPUT_VAPI_PATH "${CMAKE_CURRENT_BINARY_DIR}${CMAKE_FILES_DIRECTORY}/${ARGS_BINARY_NAME}.dir")
-         #message ("AAA: ${OUTPUT_VAPI_PATH}")
-         #message ("BBB: ${OUTPUT_VAPI_PATH}/${LIBRARY_NAME}.vapi") 
-         # Store the vapi dirs so they can be used by other sub projects that might use
-         # the library
-         #list (APPEND VAPI_INCLUDE_DIR "${OUTPUT_VAPI_PATH}")
-        #add_local_package (${ARGS_BINARY_NAME}, ${OUTPUT_VAPI_PATH} )
         # Precompile vala files for library
         vala_precompile (VALA_C ${ARGS_BINARY_NAME}
             ${VALA_FILES}
@@ -376,35 +309,24 @@ macro(hen_build)
         # For libraries
         GENERATE_VAPI
             ${LIBRARY_NAME}
-            #${OUTPUT_VAPI_PATH}/${LIBRARY_NAME}
         GENERATE_HEADER
             ${LIBRARY_NAME}
         )
         set( ELEM_VAPI_DIR ${CMAKE_BINARY_DIR})
 
     else()
-        #set( VALA_INCLUDE_VAPI_DIR "")
-        #foreach(vapi_dir "${VAPI_INCLUDE_DIR}")
-        #    set( VALA_INCLUDE_VAPI_DIR ${VALA_INCLUDE_VAPI_DIR} "--vapidir=${vapi_dir}")
-        #endforeach() 
-        #message ("VALA_INCLUDE_VAPI_DIR: ${VALA_INCLUDE_VAPI_DIR}")
         # Precompile vala files for app
         vala_precompile (VALA_C ${ARGS_BINARY_NAME}
             ${VALA_FILES}
             ${CONFIG_FILE}
         PACKAGES
             ${VALA_PACKAGES}
-        #CUSTOM_VAPIS
-            #/home/cran/Documents/Projects/i-hate-zoos/hen-tests/vala-stacktrace/build/CMakeFiles/vala-stacktrace.dir/vala-stacktrace.vapi
-            #${VALA_LOCAL_PACKAGES}
         OPTIONS
             # TODO : deprecated ??
             --thread
             # TODO
             --vapidir=${CMAKE_BINARY_DIR}
             --vapidir=${CMAKE_CURRENT_SOURCE_DIR}/vapi
-            #${VALA_INCLUDE_VAPI_DIR}
-            #--vapidir=/home/cran/Documents/Projects/i-hate-zoos/hen-tests/vala-stacktrace/build/CMakeFiles/vala-stacktrace.dir
             ${VALA_DEFINES}
             ${EXTRA_VALA_OPTIONS}
             ${ARGS_VALA_OPTIONS}
@@ -418,3 +340,112 @@ macro(hen_build)
     #include_directories (${ARGS_SOURCE_PATH})
 endmacro()
 
+macro(handle_packages)
+    # Handle the packges
+    set (VALA_PACKAGES "")
+    set (VALA_LOCAL_PACKAGES "")
+    # Used in libs.pc.make
+    set (COMPLETE_DIST_PC_PACKAGES "")
+    # Used in libs.deps.make
+    set (ELEM_DEPS_PC_PACKAGES "")
+    set (APT_PC_PACKAGES "")
+
+    # Pre process the package list to get the version and version operators if specified
+    foreach(vala_package ${ARGS_PACKAGES})
+
+        # Extracting (and removing the )
+        string( STRIP "${vala_package}" vala_package)
+        #string( FIND "${vala_package}" " " index)
+        #message( "PACKAGE: ${vala_package} ")
+        #set( package_version "")
+        #if( index GREATER -1 )
+        #    string( LENGTH ${vala_package} line_len)
+        #    string( SUBSTRING ${vala_package} index line_len package_version)
+        #    string( SUBSTRING ${vala_package} 0 1 vala_package)
+        #endif()
+        #message( "PKG: ${vala_package} VER: ${package_version}")
+        if ("${vala_package}"  STREQUAL ">=" OR "${vala_package}" STREQUAL "<="  OR "${vala_package}"  STREQUAL "=")
+            set (ignore_next "true")
+            set (package_version_op ${vala_package})
+        else ()
+            if( "${ignore_next}"  STREQUAL "true")
+                set (package_version ${vala_package})
+                unset (ignore_next)    
+            else ()
+                list( APPEND PACKAGES ${vala_package})
+            endif()
+        endif ()
+    endforeach()
+
+    foreach(vala_package ${PACKAGES})
+
+        string( STRIP "${vala_package}" vala_package)
+
+        set (pc_package "")
+        get_pc_package (${vala_package} pc_package)
+        set (in_debian "")
+        # return "true" if package is in debian repo
+        is_vala_package_in_debian (${vala_package} in_debian)
+
+        if(vala_package STREQUAL "posix" OR NOT in_debian STREQUAL "true" OR vala_package STREQUAL "linux")
+            # message ("Ignoring checking for ${pkg}")
+            list(APPEND vapi_packages "${vala_package}")
+            # Is this correct???
+            #list(APPEND checked_pc_packages "${pc_package}")
+        else()
+            # message ("Adding checked pkg ${pkg}")
+            list(APPEND checked_pc_packages "${pc_package}")
+        endif()
+
+        # Posix and linux are vala only packages without
+        # c libraries -> they should be excluded from the pc and
+        # deps files
+        if(in_debian STREQUAL "true" AND NOT vala_package STREQUAL "linux" AND NOT vala_package STREQUAL "posix")
+            set(COMPLETE_DIST_PC_PACKAGES " ${COMPLETE_DIST_PC_PACKAGES} ${pc_package}")
+            set(ELEM_DEPS_PC_PACKAGES  "${ELEM_DEPS_PC_PACKAGES}${pc_package}\n")
+            set (apt_pkg "")
+            get_apt_pc_packages( ${vala_package} apt_pkg)
+            set(APT_PC_PACKAGES ${APT_PC_PACKAGES} "${apt_pkg}")
+        endif()
+
+        # TODO Handle threading better with the options etc
+        # TODO test this
+        if( NOT vala_package STREQUAL "gthread-2.0"  )
+            set(VALA_PACKAGES ${VALA_PACKAGES} ${vala_package})
+        endif()
+
+    endforeach()
+    install_apt_packges ("${APT_PC_PACKAGES}")
+    #set (DEPS_CFLAGS "")
+    #set (DEPS_LIBRARIES "")
+    #set (DEPS_LIBRARY_DIRS "")
+
+    #set (bin_cflags "")
+    #set (bin_libs "")
+    #set (bin_lib_dirs "")
+    #message ("Checked ${checked_pc_packages}")
+    if( checked_pc_packages )
+        # message ("CHEKING: ${checked_pc_packages}...")
+        set (DEPSNAME "DEPS_${ARGS_BINARY_NAME}_VAR")
+        pkg_check_modules (${DEPSNAME} REQUIRED QUIET ${checked_pc_packages})
+        
+    endif()
+    foreach( vala_local_pkg ${list_vala_local_packages} )
+        local_check_package ("${DEPSNAME}" "${vala_local_pkg}")
+    endforeach()
+    # get_property(bin_libs VARIABLE PROPERTY "${DEPSNAME}_LIBRARIES")
+    # Setting the flags so that the required libraries are found 
+    # at compile time and linkin time
+    if( NOT "${${DEPSNAME}_CFLAGS}" STREQUAL "" )
+        #message ("!!! CFLAGS : ${${DEPSNAME}_CFLAGS}")
+        add_definitions (${${DEPSNAME}_CFLAGS})
+    endif()
+    if( NOT "${${DEPSNAME}_LIBRARY_DIRS}" STREQUAL "" )
+        #message ("!!! DIRS : ${${DEPSNAME}_LIBRARY_DIRS}")
+        link_directories (${${DEPSNAME}_LIBRARY_DIRS})
+    endif()
+    if( NOT "${${DEPSNAME}_LIBRARIES}" STREQUAL "" )
+        #message ("!!! LIBS : ${${DEPSNAME}_LIBRARIES}")
+        link_libraries (${${DEPSNAME}_LIBRARIES})
+    endif()
+endmacro()   

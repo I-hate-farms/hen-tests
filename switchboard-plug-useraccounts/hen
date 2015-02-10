@@ -5,6 +5,8 @@
 #  - 0.3: add task list
 #  - 0.4: add task rebuild 
 #  - 0.5: fix warnings
+#  - 0.6: add task rel 
+#  - 0.7: fixing formatting
 
 OPERATION="build"
 
@@ -33,15 +35,17 @@ do_update () {
     	rm -rf ${TEMP_FOLDER}
     fi
     mkdir ${TEMP_FOLDER} 
-    echo "Checking for newer version..."
+    echo ""
+    echo -e "${white}Checking for newer version...${NC}"
+    echo "----------"
     wget --quiet -P ${TEMP_FOLDER} ${VERSION_URL}
     SERVER_VERSION=`cat ${VERSION_FILE}`
     if [ -d ${DEST_FOLDER} ] ; then
     	LOCAL_VERSION=`cat ${DEST_FOLDER}/Hen-VERSION.txt`
-    	echo " Local version : ${LOCAL_VERSION}"
+    	echo "   Local version : ${LOCAL_VERSION}"
     fi 
 
-    echo -e " Server version: ${white}${SERVER_VERSION}${NC}"
+    echo -e "   Server version: ${white}${SERVER_VERSION}${NC}"
 
     # Is an update required?
 	if [ "${SERVER_VERSION}" == "${LOCAL_VERSION}" ]; then
@@ -59,10 +63,11 @@ do_update () {
       if [ -d ${BUILD_FOLDER} ] ; then
         rm -rf ${BUILD_FOLDER}
       fi 
+      # Update the current hen script file with the a new one
+      cp ./cmake/hen .
 
 	    # Cleaning up
 	    rm -rf ${TEMP_FOLDER}
-
 	    echo -e "${white}Hen updated to ${SERVER_VERSION}${NC}"
     fi
 
@@ -74,7 +79,9 @@ do_prepare () {
       if [ ! -f "${DEST_FOLDER}/Hen-VERSION.txt" ] ; then
         do_update 
       fi 
+      echo ""
       echo -e "${white}Preparing your build ...${NC}"
+      echo "----------"
       if [ -d ${BUILD_FOLDER} ] ; then
         rm -rf ${BUILD_FOLDER}
       fi 
@@ -90,6 +97,7 @@ do_build () {
       fi 
       echo ""
       echo -e "${white}Building your application ...${NC}"
+      echo "----------"      
       cd ${BUILD_FOLDER}
       make 
       cd ..        
@@ -114,6 +122,19 @@ do_help () {
   fi 
 }
 
+do_internal_release () {
+  cp hen ./cmake/
+  DIST_FILE=./dist/hen-latest.zip
+  if [ -f ${DIST_FILE} ] ; then
+    rm ${DIST_FILE}
+  fi 
+  cd ${DEST_FOLDER}
+  zip -q -r ../dist/hen-latest.zip .
+  cd ..
+  cp ./cmake/Hen-VERSION.txt ./dist/
+  echo -e "${white}Release ready${NC}."
+}
+
 do_list () {
   echo -e "${white}Hen${NC} defines the following make tasks"
   echo -e "  - ${white}[default]${NC} : build your application along with extra files if applicable (desktop, vapi, pc, deps...)"
@@ -136,6 +157,8 @@ case "$OPERATION" in
    "list")do_list
    ;;
    "rebuild")do_rebuild
+   ;;     
+   "rel")do_internal_release
    ;;  
    "help")do_help
    ;; 
